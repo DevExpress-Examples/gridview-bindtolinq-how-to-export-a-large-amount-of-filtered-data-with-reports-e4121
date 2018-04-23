@@ -1,0 +1,22 @@
+
+<script type="text/javascript">
+    function OnClick(s, e) {
+
+        var actionParams = $("form").attr("action").split("?filterString=");
+        actionParams[1] = gvDataBindingToLinq.cpGridFilterExpression;
+        $("form").attr("action", actionParams.join("?filterString="));
+    }
+</script>
+
+@using (Html.BeginForm(new { Controller = "Home", Action = "ExportTo" })) {
+
+    @Html.DevExpress().Button(btn => {
+        btn.Name = "btnExportToXLSX";
+        btn.Text = "Export to XLSx";
+        btn.UseSubmitBehavior = true;
+        btn.ClientSideEvents.Click = "OnClick";
+    }).GetHtml()
+    <br />
+    @Html.Partial("GridViewPartial")
+   
+}
