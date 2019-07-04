@@ -1,11 +1,11 @@
 <!-- default file list -->
 *Files to look at*:
 
-* [HomeController.cs](./CS/Controllers/HomeController.cs) (VB: [HomeController.vb](./VB/Controllers/HomeController.vb))
-* [XtraReport1.cs](./CS/Controllers/XtraReport1.cs) (VB: [XtraReport1.vb](./VB/Controllers/XtraReport1.vb))
-* [Model.cs](./CS/Models/Model.cs) (VB: [Model.vb](./VB/Models/Model.vb))
-* [GridViewPartial.cshtml](./CS/Views/Home/GridViewPartial.cshtml)
-* [Index.cshtml](./CS/Views/Home/Index.cshtml)
+* [HomeController.cs](./CS/E4121/Controllers/HomeController.cs) (VB: [HomeController.vb](./VB/E4121VB/Controllers/HomeController.vb))
+* [XtraReport1.cs](./CS/E4121/Controllers/XtraReport1.cs) (VB: [XtraReport1.vb](./VB/E4121VB/Controllers/XtraReport1.vb))
+* [LargeDatabaseDataProvider.cs](./CS/E4121/Models/LargeDatabaseDataProvider.cs) (VB: [LargeDatabaseDataProvider.vb](./VB/E4121VB/Models/LargeDatabaseDataProvider.vb))
+* [GridViewPartial.cshtml](./CS/E4121/Views/Home/GridViewPartial.cshtml) (VB: [GridViewPartial.vbhtml](./VB/E4121VB/Views/Home/GridViewPartial.vbhtml))
+* [Index.cshtml](./CS/E4121/Views/Home/Index.cshtml)(VB: [Index.vbhtml](./VB/E4121VB/Views/Home/Index.vbhtml)
 <!-- default file list end -->
 # GridView - BindToLINQ - How to export a large amount of filtered data with Reports
 
@@ -16,16 +16,18 @@
 
 
 ```cs
-settings.CustomJSProperties = (s, e) =>   {
-     ASPxGridView grid = (ASPxGridView)s;
-     e.Properties["cpGridFilterExpression"] = grid.FilterExpression;
+settings.CustomJSProperties = (s, e) =>
+{
+	MVCxGridView gridView = (MVCxGridView)s;
+	e.Properties["cpGridFilterExpression"] = gridView.FilterExpression;
 };
+```
 
+```vbnet
 settings.CustomJSProperties = Sub(s, e)
-         Dim grid As ASPxGridView = DirectCast(s, ASPxGridView)
-         e.Properties("cpGridFilterExpression") = grid.FilterExpression
+	Dim gridView = TryCast(s, MVCxGridView)
+	e.Properties("cpGridFilterExpression") = gridView.FilterExpression
 End Sub
-
 ```
 
 
@@ -33,18 +35,17 @@ End Sub
 
 
 ```js
-function OnClick(s, e) {
-    var actionParams = $("form").attr("action").split("?filterString=");
-    actionParams[1] = gvDataBindingToLinq.cpGridFilterExpression;
-    $("form").attr("action", actionParams.join("?filterString="));
+function onClick(s, e) {
+	var actionParams = $("form").attr("action").split("?filterString=");
+	actionParams[1] = encodeURIComponent(GridView.cpGridFilterExpression);
+	$("form").attr("action", actionParams.join("?filterString="));
 }
-
 ```
 
 
 <p>The XtraReport class instance that's used in this Code Example is added as described in the <a href="https://documentation.devexpress.com/XtraReports/CustomDocument9974.aspx">Lesson 1 - Create a Static Report in ASP.NET MVC</a> tutorial. The report controls are bound to data using the <a href="https://documentation.devexpress.com/XtraReports/CustomDocument2433.aspx">Embedded Fields (Mail Merge)</a> feature.<br><br>You can learn more about approaches used in this example in the following resources:</p>
 <p><a href="http://documentation.devexpress.com/#XtraReports/CustomDocument4784"><u>How to: Create a Table Report</u></a><br> <a href="https://www.devexpress.com/Support/Center/p/E573">How to create a web based report at runtime</a><br> <a href="https://www.devexpress.com/Support/Center/p/E2596">How to convert the CriteriaOperator to a lambda expression, so, the latter expression can be used in the IQueriable source</a></p>
-<p><a href="https://www.devexpress.com/Support/Center/p/S39667">GridView Extension - Provide the capability to export large LINQ data</a><br> <a href="http://msdn.microsoft.com/en-us/library/aa992075%28v=vs.80%29.aspx"><u>Walkthrough: Installing the AdventureWorks Database</u></a></p>
+<p><a href="https://www.devexpress.com/Support/Center/p/S39667">GridView Extension - Provide the capability to export large LINQ data</a></p>
 
 <br/>
 
