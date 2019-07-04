@@ -4,8 +4,8 @@
 * [HomeController.cs](./CS/E4121/Controllers/HomeController.cs) (VB: [HomeController.vb](./VB/E4121VB/Controllers/HomeController.vb))
 * [XtraReport1.cs](./CS/E4121/Controllers/XtraReport1.cs) (VB: [XtraReport1.vb](./VB/E4121VB/Controllers/XtraReport1.vb))
 * [LargeDatabaseDataProvider.cs](./CS/E4121/Models/LargeDatabaseDataProvider.cs) (VB: [LargeDatabaseDataProvider.vb](./VB/E4121VB/Models/LargeDatabaseDataProvider.vb))
-* [GridViewPartial.cshtml](./CS/E4121/Views/Home/GridViewPartial.cshtml) (VB: [GridViewPartial.vbhtml](./VB/E4121VB/Views/Home/GridViewPartial.vbhtml))
-* [Index.cshtml](./CS/E4121/Views/Home/Index.cshtml)(VB: [Index.vbhtml](./VB/E4121VB/Views/Home/Index.vbhtml)
+* [GridViewPartial.cshtml](./CS/E4121/Views/Home/_GridViewPartial.cshtml) (VB: [GridViewPartial.vbhtml](./VB/E4121VB/Views/Home/_GridViewPartial.vbhtml))
+* [Index.cshtml](./CS/E4121/Views/Home/Index.cshtml) (VB: [Index.vbhtml](./VB/E4121VB/Views/Home/Index.vbhtml))
 <!-- default file list end -->
 # GridView - BindToLINQ - How to export a large amount of filtered data with Reports
 
