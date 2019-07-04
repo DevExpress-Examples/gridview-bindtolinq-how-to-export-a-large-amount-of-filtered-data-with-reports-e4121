@@ -1,0 +1,37 @@
+@{
+    var grid = Html.DevExpress().GridView<E4121.Models.Email>(settings => {
+        settings.Name = "GridView";
+        settings.Width = Unit.Percentage(100);
+        settings.CallbackRouteValues = new { Controller = "Home", Action = "GridViewPartial" };
+
+        settings.KeyFields(m => m.ID);
+
+        settings.Settings.ShowFilterRow = true;
+
+        settings.Columns.Add(m => m.From).Width = Unit.Pixel(200);
+        settings.Columns.Add(m => m.Subject);
+        settings.Columns.Add(m => m.Sent, column =>
+        {
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+            column.Width = Unit.Pixel(100);
+            column.Settings.AllowHeaderFilter = DefaultBoolean.True;
+            column.SettingsHeaderFilter.Mode = GridHeaderFilterMode.DateRangePicker;
+            column.Settings.AllowAutoFilter = DefaultBoolean.False;
+        });
+        settings.Columns.Add("Size").Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+        settings.Columns.Add(m => m.HasAttachment, column =>
+        {
+            column.Caption = "Attachment?";
+            column.ColumnType = MVCxGridViewColumnType.CheckBox;
+            column.Width = Unit.Pixel(100);
+        });
+
+        settings.CustomJSProperties = (s, e) =>
+        {
+            MVCxGridView gridView = (MVCxGridView)s;
+            e.Properties["cpGridFilterExpression"] = gridView.FilterExpression;
+        };
+    });
+}
+@grid.BindToLINQ("E4121.Models.LargeDatabaseDataContext", "Emails").GetHtml()
