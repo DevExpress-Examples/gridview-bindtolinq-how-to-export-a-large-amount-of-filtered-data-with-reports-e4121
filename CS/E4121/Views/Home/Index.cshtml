@@ -1,0 +1,33 @@
+@using E4121.Models
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@if (!DatabaseGenerator.IsReady("GeneratedEmailTable"))
+{
+    @Html.Partial("_CreateDatabasePartial", "GeneratedEmailTable")
+}
+else
+{
+
+    <script type="text/javascript">
+        function onClick(s, e) {
+            var actionParams = $("form").attr("action").split("?filterString=");
+            actionParams[1] = encodeURIComponent(GridView.cpGridFilterExpression);
+            $("form").attr("action", actionParams.join("?filterString="));
+        }
+    </script>
+
+    using (Html.BeginForm(new { Controller = "Home", Action = "ExportTo" }))
+    {
+        Html.DevExpress().Button(btn =>
+        {
+            btn.Name = "btnExportToXLSX";
+            btn.Text = "Export to XLSx";
+            btn.UseSubmitBehavior = true;
+            btn.ClientSideEvents.Click = "onClick";
+        }).Render();
+        <br />
+        Html.RenderAction("GridViewPartial");
+    }
+}
